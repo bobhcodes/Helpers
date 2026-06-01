@@ -1,0 +1,31 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="library" type="libraryType"/>
+	<xs:complexType name="bookType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute type="xs:string" name="id"/>
+				<xs:attribute type="xs:string" name="faviconMimeType"/>
+				<xs:attribute type="xs:int" name="size"/>
+				<xs:attribute type="xs:string" name="url"/>
+				<xs:attribute type="xs:int" name="mediaCount"/>
+				<xs:attribute type="xs:int" name="articleCount"/>
+				<xs:attribute type="xs:string" name="favicon"/>
+				<xs:attribute type="xs:string" name="title"/>
+				<xs:attribute type="xs:string" name="description"/>
+				<xs:attribute type="xs:string" name="language"/>
+				<xs:attribute type="xs:string" name="creator"/>
+				<xs:attribute type="xs:string" name="publisher"/>
+				<xs:attribute type="xs:string" name="name"/>
+				<xs:attribute type="xs:string" name="tags"/>
+				<xs:attribute type="xs:date" name="date"/>
+				<xs:attribute type="xs:string" name="flavour"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="libraryType">
+		<xs:sequence>
+			<xs:element type="bookType" name="book" maxOccurs="unbounded" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute type="xs:int" name="version"/>
+	</xs:complexType>
+</xs:schema>
