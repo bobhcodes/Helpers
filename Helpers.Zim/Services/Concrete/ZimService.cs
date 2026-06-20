@@ -1,4 +1,5 @@
 ﻿using Helpers.Zim.Clients;
+using Helpers.Zim.Models;
 using Helpers.Zim.Models.Generated;
 using System.Runtime.CompilerServices;
 
@@ -6,42 +7,29 @@ namespace Helpers.Zim.Services.Concrete;
 
 public class ZimService(IZimClient client) : IZimService
 {
-	public async IAsyncEnumerable<bookType> GetBooksAsync(string name, string? flavor = null, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+	public async IAsyncEnumerable<Entry> GetEntriesAsync(string name, string? flavor = null, [EnumeratorCancellation] CancellationToken cancellationToken = default)
 	{
 		ArgumentException.ThrowIfNullOrEmpty(name);
 
-		await foreach (var book in GetBooksAsync(cancellationToken))
+		await foreach (var entry in GetEntriesAsync(cancellationToken))
 		{
-			if (string.Equals(book.name, name, StringComparison.InvariantCultureIgnoreCase))
+			if (string.Equals(entry.Name, name, StringComparison.OrdinalIgnoreCase))
 			{
 				if (string.IsNullOrEmpty(flavor)
-					|| string.Equals(book.flavour, flavor, StringComparison.OrdinalIgnoreCase))
+					|| string.Equals(entry.Flavor, flavor, StringComparison.OrdinalIgnoreCase))
 				{
-					yield return book;
+					yield return entry;
 				}
 			}
 		}
 	}
 
-	public IAsyncEnumerable<bookType> GetBooksAsync(CancellationToken cancellationToken = default)
-		=> client.GetBooksAsync(cancellationToken);
+	public IAsyncEnumerable<Entry> GetEntriesAsync(CancellationToken cancellationToken = default)
+		=> client.GetEntriesAsync(cancellationToken);
 
-	public IAsyncEnumerable<Uri> GetUrisAsync(bookType book, CancellationToken cancellationToken = default)
+	public IAsyncEnumerable<Uri> GetUrisAsync(Entry entry, CancellationToken cancellationToken = default)
 	{
-		ArgumentNullException.ThrowIfNull(book);
-		return GetUrisAsync(book.url, cancellationToken);
-	}
-
-	private IAsyncEnumerable<Uri> GetUrisAsync(string uriString, CancellationToken cancellationToken = default)
-	{
-		ArgumentException.ThrowIfNullOrEmpty(uriString);
-
-		if (Uri.TryCreate(uriString, UriKind.Absolute, out var uri))
-		{
-			return GetUrisAsync(uri, cancellationToken);
-		}
-
-		throw new ArgumentOutOfRangeException(nameof(uriString), uriString, uriString + " could not be parsed as a URI");
+		return GetUrisAsync(entry.Link, cancellationToken);
 	}
 
 	public async IAsyncEnumerable<Uri> GetUrisAsync(Uri uri, [EnumeratorCancellation] CancellationToken cancellationToken = default)

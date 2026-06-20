@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metalink xmlns="urn:ietf:params:xml:ns:metalink">
   <generator>MirrorBrain/2.19.0</generator>
-  <origin dynamic="true">https://lbo.download.kiwix.org/zim/wikipedia/wikipedia_en_all_maxi_2026-02.zim.meta4</origin>
-  <published>2026-06-02T18:22:04Z</published>
+  <origin dynamic="true">https://lb.download.kiwix.org/zim/wikipedia/wikipedia_en_all_maxi_2026-02.zim.meta4</origin>
+  <published>2026-06-20T20:44:45Z</published>
   <publisher>
     <name>Kiwix project</name>
     <url>https://kiwix.org</url>
@@ -13,7 +13,7 @@
 
     <!-- <mtime>1772071700</mtime> -->
 
-    <!-- internal id: 2152682 -->
+    <!-- internal id: 3709 -->
     <hash type="md5">b422eaef54b1a234e612633c588f2909</hash>
     <hash type="sha-1">eb3fd04fa8ae5a60b1ce72caff1c4648c1ce17a3</hash>
     <hash type="sha-256">bf0853bf94ed8c53524e5ee67288bc4898819bc9d496af2b3f852b6588abdd27</hash>
@@ -29582,7 +29582,7 @@
 
 
     <!-- Found 13 mirrors: 0 in the same network prefix, 0 in the same autonomous system,
-         1 handling this country, 6 in the same region, 6 elsewhere -->
+         1 handling this country, 6 in the same region, 4 elsewhere -->
 
     <!-- Mirrors in the same network (unknown): -->
 
@@ -29603,8 +29603,6 @@
     <url location="us" priority="8">https://ny.mirror.driftle.ss/kiwix/zim/wikipedia/wikipedia_en_all_maxi_2026-02.zim</url>
     <url location="us" priority="9">https://wi.mirror.driftle.ss/kiwix/zim/wikipedia/wikipedia_en_all_maxi_2026-02.zim</url>
     <url location="us" priority="10">https://dumps.wikimedia.org/kiwix/zim/wikipedia/wikipedia_en_all_maxi_2026-02.zim</url>
-    <url location="ca" priority="11">https://mirror-sites-ca.mblibrary.info/mirror-sites/download.kiwix.org/zim/wikipedia/wikipedia_en_all_maxi_2026-02.zim</url>
-    <url location="us" priority="12">https://ftpmirror.your.org/pub/kiwix/zim/wikipedia/wikipedia_en_all_maxi_2026-02.zim</url>
-    <url location="aq" priority="13">https://mirror-sites-in.mblibrary.info/mirror-sites/download.kiwix.org/zim/wikipedia/wikipedia_en_all_maxi_2026-02.zim</url>
+    <url location="aq" priority="11">https://mirror-sites-in.mblibrary.info/mirror-sites/download.kiwix.org/zim/wikipedia/wikipedia_en_all_maxi_2026-02.zim</url>
   </file>
 </metalink>

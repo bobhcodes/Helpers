@@ -16,7 +16,7 @@ public sealed class Fixture : IDisposable
 		_serviceProvider = new ServiceCollection()
 			.AddTransient<HttpMessageHandler>(_ => new HttpClientHandler { AllowAutoRedirect = false, })
 			.AddSingleton(new XmlSerializerFactory())
-			.AddHttpClient<IZimClient, ZimClient>(c => c.BaseAddress = new Uri("https://download.kiwix.org/"))
+			.AddHttpClient<IZimClient, ZimClient>(c => c.BaseAddress = new Uri("https://browse.library.kiwix.org/"))
 				.ConfigurePrimaryHttpMessageHandler<HttpMessageHandler>()
 				.Services
 			.AddTransient<IZimService, ZimService>()

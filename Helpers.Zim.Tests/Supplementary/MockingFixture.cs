@@ -17,7 +17,7 @@ public sealed class MockingFixture : IDisposable
 			.AddTransient<HttpMessageHandler>(_ => new HttpClientHandler { AllowAutoRedirect = false, })
 			.AddTransient<MockingHandler>()
 			.AddSingleton(new XmlSerializerFactory())
-			.AddHttpClient<IZimClient, ZimClient>(c => c.BaseAddress = new Uri("https://download.kiwix.org/"))
+			.AddHttpClient<IZimClient, ZimClient>(c => c.BaseAddress = new Uri("https://browse.library.kiwix.org/"))
 				.ConfigurePrimaryHttpMessageHandler<HttpMessageHandler>()
 				.AddHttpMessageHandler<MockingHandler>()
 				.Services

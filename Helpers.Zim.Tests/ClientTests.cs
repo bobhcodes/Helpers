@@ -11,26 +11,25 @@ public class ClientTests(MockingFixture fixture) : IClassFixture<MockingFixture>
 	public async Task GetBooksTests()
 	{
 		// Act
-		var books = await _sut.GetBooksAsync().ToArrayAsync();
+		var entries = await _sut.GetEntriesAsync().ToArrayAsync();
 
 		// Assert
-		Assert.NotNull(books);
-		Assert.NotEmpty(books);
-		Assert.DoesNotContain(null, books);
+		Assert.NotNull(entries);
+		Assert.NotEmpty(entries);
 
-		foreach (var book in books)
+		foreach (var entry in entries)
 		{
-			Assert.NotNull(book);
-			Assert.NotNull(book.id);
-			Assert.NotEqual(default, book.date);
-			Assert.NotNull(book.name);
-			Assert.NotNull(book.title);
-			Assert.NotNull(book.url);
+			Assert.NotEqual(default, entry);
+			Assert.NotNull(entry.Id);
+			Assert.NotEqual(default, entry.Updated);
+			Assert.NotNull(entry.Name);
+			Assert.NotNull(entry.Title);
+			Assert.NotNull(entry.Link);
 		}
 	}
 
 	[Theory]
-	[InlineData("https://lbo.download.kiwix.org/zim/wikipedia/wikipedia_en_all_maxi_2026-02.zim.meta4")]
+	[InlineData("https://lb.download.kiwix.org/zim/wikipedia/wikipedia_en_all_maxi_2026-02.zim.meta4")]
 	public async Task GetFileTests(string uriString)
 	{
 		// Arrange
