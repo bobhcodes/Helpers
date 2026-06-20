@@ -1,4 +1,4 @@
-﻿using Helpers.Zim.Models.Generated;
+﻿using Helpers.Zim.Models;
 using Helpers.Zim.Services;
 using Helpers.Zim.Tests.Supplementary;
 using System.Diagnostics.CodeAnalysis;
@@ -16,13 +16,13 @@ public class IntegrationTests(Fixture fixture) : IClassFixture<Fixture>
 	{
 		using var cts = new CancellationTokenSource(millisecondsDelay: 10_000);
 
-		IReadOnlyCollection<bookType> books = await _sut.GetBooksAsync(name, flavor, cts.Token)
+		IReadOnlyCollection<Entry> entries = await _sut.GetEntriesAsync(name, flavor, cts.Token)
 			.ToArrayAsync(cts.Token);
 
-		Assert.NotEmpty(books);
-		Assert.DoesNotContain(null, books);
+		Assert.NotEmpty(entries);
+		Assert.DoesNotContain(default, entries);
 
-		IReadOnlyCollection<Uri> uris = await _sut.GetUrisAsync(books.Single(), cts.Token)
+		IReadOnlyCollection<Uri> uris = await _sut.GetUrisAsync(entries.Single(), cts.Token)
 			.ToArrayAsync(cts.Token);
 
 		Assert.NotEmpty(uris);
