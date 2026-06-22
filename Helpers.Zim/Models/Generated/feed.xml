@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:opds="https://specs.opds.io/opds-1.2"
+      xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+  <id>d720bea9-8192-4bf1-a484-f2b1f21fd551</id>
+
+  <link rel="self"
+        href="/catalog/v2/entries?count=-1&amp;lang=eng"
+        type="application/atom+xml;profile=opds-catalog;kind=acquisition"/>
+  <link rel="start"
+        href="/catalog/v2/root.xml"
+        type="application/atom+xml;profile=opds-catalog;kind=navigation"/>
+  <link rel="up"
+        href="/catalog/v2/root.xml"
+        type="application/atom+xml;profile=opds-catalog;kind=navigation"/>
+
+  <title>Filtered Entries (count=-1&amp;lang=eng)</title>
+  <updated>2026-06-20T20:44:08Z</updated>
+  <totalResults>1100</totalResults>
+  <startIndex>0</startIndex>
+  <itemsPerPage>1100</itemsPerPage>
+  <entry>
+    <id>urn:uuid:9528fea1-132e-9621-e133-e8a6c200e8c7</id>
+    <title>スタック・オーバーフロー</title>
+    <updated>2026-02-04T00:00:00Z</updated>
+    <summary>熱狂的でプロフェッショナルなプログラマーのためのQ&amp;A</summary>
+    <language>eng,jpn</language>
+    <name>ja.stackoverflow.com_mul_all</name>
+    <flavour></flavour>
+    <category>stack_exchange</category>
+    <tags>stack_exchange;_category:stack_exchange;_details:no;_videos:no;_ftindex:no;_pictures:yes</tags>
+    <articleCount>46764</articleCount>
+    <mediaCount>266</mediaCount>
+    <link rel="http://opds-spec.org/image/thumbnail"
+          href="/catalog/v2/illustration/9528fea1-132e-9621-e133-e8a6c200e8c7/?size=48"
+          type="image/png;width=48;height=48;scale=1"/>
+    <link type="text/html" href="/content/ja.stackoverflow.com_mul_all_2026-02" />
+    <link rel="http://opds-spec.org/acquisition/open-access" type="application/x-zim" href="https://lb.download.kiwix.org/zim/stack_exchange/ja.stackoverflow.com_mul_all_2026-02.zim.meta4" length="236789760" />
+    <author>
+      <name>Stack Exchange</name>
+    </author>
+    <publisher>
+      <name>openZIM</name>
+    </publisher>
+  </entry>
+  <entry>
+    <id>urn:uuid:600c47c6-a792-0f78-8fcc-9c05cf1c556b</id>
+    <title>PHP Manual</title>
+    <updated>2024-08-13T00:00:00Z</updated>
+    <summary>PHP Manual</summary>
+    <language>eng</language>
+    <name>php.net_en_all</name>
+    <flavour></flavour>
+    <category>other</category>
+    <tags>_category:other;_ftindex:yes;_pictures:yes;_videos:yes;_details:yes</tags>
+    <articleCount>11604</articleCount>
+    <mediaCount>76</mediaCount>
+    <link rel="http://opds-spec.org/image/thumbnail"
+          href="/catalog/v2/illustration/600c47c6-a792-0f78-8fcc-9c05cf1c556b/?size=48"
+          type="image/png;width=48;height=48;scale=1"/>
+    <link type="text/html" href="/content/php.net_en_all_2024-08" />
+    <link rel="http://opds-spec.org/acquisition/open-access" type="application/x-zim" href="https://lb.download.kiwix.org/zim/zimit/php.net_en_all_2024-08.zim.meta4" length="32847872" />
+    <author>
+      <name>-</name>
+    </author>
+    <publisher>
+      <name>openZIM</name>
+    </publisher>
+  </entry>
+  <entry>
+    <id>urn:uuid:5ac8d4fc-e699-bdf7-bbfb-7c7bd3365a26</id>
+    <title>MediaWiki</title>
+    <updated>2023-07-05T00:00:00Z</updated>
+    <summary>From mediawiki.org</summary>
+    <language>eng</language>
+    <name>mediawiki_en_all</name>
+    <flavour></flavour>
+    <category></category>
+    <tags>mediawiki;_details:yes;_ftindex:yes;_pictures:yes;_videos:yes</tags>
+    <articleCount>67772</articleCount>
+    <mediaCount>11707</mediaCount>
+    <link rel="http://opds-spec.org/image/thumbnail"
+          href="/catalog/v2/illustration/5ac8d4fc-e699-bdf7-bbfb-7c7bd3365a26/?size=48"
+          type="image/png;width=48;height=48;scale=1"/>
+    <link type="text/html" href="/content/mediawiki_en_all_2023-07" />
+    <link rel="http://opds-spec.org/acquisition/open-access" type="application/x-zim" href="https://lb.download.kiwix.org/zim/other/mediawiki_en_all_2023-07.zim.meta4" length="6830024704" />
+    <author>
+      <name>Mediawiki</name>
+    </author>
+    <publisher>
+      <name>Kiwix</name>
+    </publisher>
+  </entry>
+  <entry>
+    <id>urn:uuid:e395a427-33f4-ec3b-7620-a5bb6c85b5f1</id>
+    <title>sh1.org</title>
+    <updated>2026-06-07T00:00:00Z</updated>
+    <summary>Railway signals</summary>
+    <language>eng</language>
+    <name>sh1.org_en_all</name>
+    <flavour></flavour>
+    <category>other</category>
+    <tags>_category:other;trains;_ftindex:yes;_pictures:yes;_videos:yes;_details:yes</tags>
+    <articleCount>115</articleCount>
+    <mediaCount>1176</mediaCount>
+    <link rel="http://opds-spec.org/image/thumbnail"
+          href="/catalog/v2/illustration/e395a427-33f4-ec3b-7620-a5bb6c85b5f1/?size=48"
+          type="image/png;width=48;height=48;scale=1"/>
+    <link type="text/html" href="/content/sh1.org_en_all_2026-06" />
+    <link rel="http://opds-spec.org/acquisition/open-access" type="application/x-zim" href="https://lb.download.kiwix.org/zim/zimit/sh1.org_en_all_2026-06.zim.meta4" length="36063232" />
+    <author>
+      <name>-</name>
+    </author>
+    <publisher>
+      <name>openZIM</name>
+    </publisher>
+  </entry>
+  <entry>
+    <id>urn:uuid:d5db15fd-5e8e-02f5-4c98-b7e3853cf8ab</id>
+    <title>Stack Overflow на русском</title>
+    <updated>2026-02-07T00:00:00Z</updated>
+    <summary>Вопросы и ответы для программистов</summary>
+    <language>eng,rus</language>
+    <name>ru.stackoverflow.com_mul_all</name>
+    <flavour></flavour>
+    <category>stack_exchange</category>
+    <tags>_category:stack_exchange;stack_exchange;_details:no;_videos:no;_ftindex:no;_pictures:yes</tags>
+    <articleCount>626131</articleCount>
+    <mediaCount>3421</mediaCount>
+    <link rel="http://opds-spec.org/image/thumbnail"
+          href="/catalog/v2/illustration/d5db15fd-5e8e-02f5-4c98-b7e3853cf8ab/?size=48"
+          type="image/png;width=48;height=48;scale=1"/>
+    <link type="text/html" href="/content/ru.stackoverflow.com_mul_all_2026-02" />
+    <link rel="http://opds-spec.org/acquisition/open-access" type="application/x-zim" href="https://lb.download.kiwix.org/zim/stack_exchange/ru.stackoverflow.com_mul_all_2026-02.zim.meta4" length="2683406336" />
+    <author>
+      <name>Stack Exchange</name>
+    </author>
+    <publisher>
+      <name>openZIM</name>
+    </publisher>
+  </entry>
+</feed>

@@ -1,5 +1,4 @@
-﻿using Helpers.Zim.Models;
-using Helpers.Zim.Services;
+﻿using Helpers.Zim.Services;
 using Helpers.Zim.Tests.Supplementary;
 using System.Diagnostics.CodeAnalysis;
 
@@ -16,7 +15,7 @@ public class IntegrationTests(Fixture fixture) : IClassFixture<Fixture>
 	{
 		using var cts = new CancellationTokenSource(millisecondsDelay: 10_000);
 
-		IReadOnlyCollection<Entry> entries = await _sut.GetEntriesAsync(name, flavor, cts.Token)
+		IReadOnlyCollection<entryType> entries = await _sut.GetEntriesAsync(name, flavor, cts.Token)
 			.ToArrayAsync(cts.Token);
 
 		Assert.NotEmpty(entries);

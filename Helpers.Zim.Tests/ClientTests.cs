@@ -20,11 +20,11 @@ public class ClientTests(MockingFixture fixture) : IClassFixture<MockingFixture>
 		foreach (var entry in entries)
 		{
 			Assert.NotEqual(default, entry);
-			Assert.NotNull(entry.Id);
-			Assert.NotEqual(default, entry.Updated);
-			Assert.NotNull(entry.Name);
-			Assert.NotNull(entry.Title);
-			Assert.NotNull(entry.Link);
+			Assert.NotNull(entry.id);
+			Assert.NotEqual(default, entry.updated);
+			Assert.NotNull(entry.name);
+			Assert.NotNull(entry.title);
+			Assert.NotNull(entry.link);
 		}
 	}
 
