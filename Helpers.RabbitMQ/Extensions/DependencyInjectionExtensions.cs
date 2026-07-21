@@ -88,7 +88,7 @@ public static class DependencyInjectionExtensions
 				{
 					channel.QueueDeclareAsync(
 						queue: queueName,
-						durable: false,
+						durable: true,
 						exclusive: false,
 						autoDelete: false,
 						arguments: default).GetAwaiter().GetResult();

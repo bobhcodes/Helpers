@@ -112,7 +112,9 @@ public class ConfigurationTests(Fixtures.ConfigurationFixture fixture) : IClassF
 		Assert.NotNull(config.VirtualHost);
 		Assert.NotNull(config.QueueNames);
 		Assert.NotEmpty(config.QueueNames);
-		Assert.DoesNotContain(default, config.QueueNames);
+		Assert.Single(config.QueueNames);
+		Assert.NotNull(config.QueueNames[0]);
+		Assert.NotEmpty(config.QueueNames[0]);
 
 		Assert.NotEqual(RabbitMQ.Config.DefaultHostname, config.Hostname);
 		Assert.NotEqual(RabbitMQ.Config.DefaultPort, config.Port);
