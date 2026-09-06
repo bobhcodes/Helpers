@@ -36,10 +36,10 @@ public class RateTests
 		var sut = provider.GetRequiredService<IService>();
 
 		// Act
-		var subreddit = await sut.GetRandomSubredditNameAsync();
-		await foreach (var thread in sut.GetThreadIdsForSubredditAsync(subreddit).Take(100))
+		var subreddit = await sut.GetRandomSubredditNameAsync(TestContext.Current.CancellationToken);
+		await foreach (var thread in sut.GetThreadIdsForSubredditAsync(subreddit, TestContext.Current.CancellationToken).Take(100))
 		{
-			await foreach (var comment in sut.GetCommentsForThreadIdAsync(subreddit, thread))
+			await foreach (var comment in sut.GetCommentsForThreadIdAsync(subreddit, thread, TestContext.Current.CancellationToken))
 			{
 				foreach (var link in sut.GetLinksFromComment(comment))
 				{

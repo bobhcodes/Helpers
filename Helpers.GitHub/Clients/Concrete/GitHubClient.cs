@@ -30,7 +30,7 @@ namespace Helpers.GitHub.Clients.Concrete
 			}
 
 			var o = await response.Content.ReadFromJsonAsync<T>();
-			return o;
+			return o!;
 		}
 
 		private async IAsyncEnumerable<T> GetCollectionAsync<T>(string requestUri)

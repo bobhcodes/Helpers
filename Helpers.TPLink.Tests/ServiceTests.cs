@@ -12,7 +12,7 @@ public class ServiceTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fix
 	[Fact]
 	public async Task DiscoveryTests()
 	{
-		var endPoints = await GetDevicesIPAddressesAsync().ToArrayAsync();
+		var endPoints = await GetDevicesIPAddressesAsync().ToArrayAsync(TestContext.Current.CancellationToken);
 		Assert.NotEmpty(endPoints);
 		Assert.DoesNotContain(null, endPoints);
 	}
@@ -33,7 +33,7 @@ public class ServiceTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fix
 	{
 		await foreach (var endPoint in GetDevicesIPAddressesAsync())
 		{
-			var data = await _service.GetRealtimeDataAsync(endPoint);
+			var data = await _service.GetRealtimeDataAsync(endPoint, TestContext.Current.CancellationToken);
 			Assert.NotEqual(default, data);
 		}
 	}
@@ -68,7 +68,7 @@ public class ServiceTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fix
 	{
 		await foreach (var endPoint in GetDevicesIPAddressesAsync())
 		{
-			var data = await _service.GetRealtimeDataAsync(endPoint);
+			var data = await _service.GetRealtimeDataAsync(endPoint, TestContext.Current.CancellationToken);
 
 			var (amps, volts, watts) = data;
 
@@ -92,7 +92,7 @@ public class ServiceTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fix
 		ValueTuple<string, IPEndPoint, PhysicalAddress>[] devices;
 		{
 			using var cts = new CancellationTokenSource(millisecondsDelay: 5_000);
-			devices = await _service.DiscoverAsync(_broadcastEndPoint).ToArrayAsync(cts.Token);
+			devices = await _service.DiscoverAsync(_broadcastEndPoint, cts.Token).ToArrayAsync(cts.Token);
 		}
 
 		Assert.NotEmpty(devices);
@@ -100,7 +100,7 @@ public class ServiceTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fix
 
 		foreach ((_, var endPoint, _) in devices)
 		{
-			await _service.GetStateAsync(endPoint);
+			await _service.GetStateAsync(endPoint, TestContext.Current.CancellationToken);
 		}
 	}
 
@@ -109,7 +109,7 @@ public class ServiceTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fix
 	{
 		await foreach (var endPoint in GetDevicesIPAddressesAsync())
 		{
-			var info = await _service.GetSystemInfoAsync(endPoint);
+			var info = await _service.GetSystemInfoAsync(endPoint, TestContext.Current.CancellationToken);
 
 			Assert.NotEqual(default, info);
 			Assert.NotEqual(default, info.alias);

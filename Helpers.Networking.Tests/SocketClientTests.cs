@@ -21,7 +21,7 @@ public class SocketClientTests : IClassFixture<Fixtures.SocketClientFixture>
 	}
 
 	[Fact]
-	public Task Connect() => _sut.ConnectAsync(_endPoint).AsTask();
+	public Task Connect() => _sut.ConnectAsync(_endPoint, TestContext.Current.CancellationToken).AsTask();
 
 	[Theory]
 	[InlineData("sendir,1:1,1,40192,3,1,96,24,48,24,24,24,48,24,24,24,48,24,24,24,24,24,24,24,24,24,24,24,24,24,48,24,48,24,24,24,24,4000\r")]
@@ -29,7 +29,7 @@ public class SocketClientTests : IClassFixture<Fixtures.SocketClientFixture>
 	{
 		await Connect();
 		var bytes = Encoding.UTF8.GetBytes(message);
-		var response = await _sut.SendAsync(bytes);
+		var response = await _sut.SendAsync(bytes, TestContext.Current.CancellationToken);
 		Assert.InRange(response, 1, int.MaxValue);
 	}
 
@@ -39,7 +39,7 @@ public class SocketClientTests : IClassFixture<Fixtures.SocketClientFixture>
 	{
 		await Send(message);
 
-		var bytesResult = await _sut.ReceiveAsync();
+		var bytesResult = await _sut.ReceiveAsync(TestContext.Current.CancellationToken);
 		Assert.NotNull(bytesResult);
 		Assert.NotEmpty(bytesResult);
 		var actual = Encoding.UTF8.GetString(bytesResult);
@@ -53,7 +53,7 @@ public class SocketClientTests : IClassFixture<Fixtures.SocketClientFixture>
 	public async Task SendAndReceive(string message, string expected)
 	{
 		await Connect();
-		var actual = await _sut.SendAndReceiveAsync(message);
+		var actual = await _sut.SendAndReceiveAsync(message, TestContext.Current.CancellationToken);
 		Assert.Equal(expected, actual);
 	}
 }

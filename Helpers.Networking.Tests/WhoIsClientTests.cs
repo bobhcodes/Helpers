@@ -14,7 +14,7 @@ public class WhoIsClientTests
 	{
 		var sut = new Helpers.Networking.Clients.Concrete.WhoIsClient();
 
-		var addressPrefixes = await sut.GetIpsAsync(asn).ToListAsync();
+		var addressPrefixes = await sut.GetIpsAsync(asn, TestContext.Current.CancellationToken).ToListAsync(TestContext.Current.CancellationToken);
 
 		Assert.NotNull(addressPrefixes);
 		Assert.NotEmpty(addressPrefixes);
@@ -96,7 +96,7 @@ public class WhoIsClientTests
 		var ipAddress = IPAddress.Parse(ipAddressString);
 		var sut = new Helpers.Networking.Clients.Concrete.WhoIsClient();
 
-		var responses = await sut.GetWhoIsDetailsAsync(ipAddress).ToListAsync();
+		var responses = await sut.GetWhoIsDetailsAsync(ipAddress, TestContext.Current.CancellationToken).ToListAsync(TestContext.Current.CancellationToken);
 
 		Assert.NotNull(responses);
 		Assert.NotEmpty(responses);

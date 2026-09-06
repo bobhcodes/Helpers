@@ -16,8 +16,8 @@ public sealed class ClientTests : IClassFixture<Fixtures.ClientFixture>
 	[InlineData("ol1 1ut", "422000112981", "CIVIC CENTRE WEST STREET OLDHAM OL1 1UT")]
 	public async Task GetAddresses(string postcode, string uprn, string address)
 	{
-		var addresses = await _sut.GetAddressesAsync(postcode)
-			.ToListAsync();
+		var addresses = await _sut.GetAddressesAsync(postcode, TestContext.Current.CancellationToken)
+			.ToListAsync(TestContext.Current.CancellationToken);
 
 		Assert.NotNull(addresses);
 		Assert.NotEmpty(addresses);
@@ -31,8 +31,8 @@ public sealed class ClientTests : IClassFixture<Fixtures.ClientFixture>
 	[InlineData("422000112981")]
 	public async Task GetBinCollections(string uprn)
 	{
-		var collections = await _sut.GetBinCollectionsAsync(uprn)
-			.ToListAsync();
+		var collections = await _sut.GetBinCollectionsAsync(uprn, TestContext.Current.CancellationToken)
+			.ToListAsync(TestContext.Current.CancellationToken);
 
 		Assert.NotEmpty(collections);
 	}

@@ -33,11 +33,11 @@ namespace Helpers.Twitch.Tests
 
 			var requestMessage = new HttpRequestMessage(HttpMethod.Post, queryString);
 
-			var responseMessage = await _httpClient.SendAsync(requestMessage);
+			var responseMessage = await _httpClient.SendAsync(requestMessage, TestContext.Current.CancellationToken);
 
-			using var stream = await responseMessage.Content!.ReadAsStreamAsync();
+			using var stream = await responseMessage.Content!.ReadAsStreamAsync(TestContext.Current.CancellationToken);
 
-			var response = await JsonSerializer.DeserializeAsync<Models.GetTokenResponseObject>(stream);
+			var response = await JsonSerializer.DeserializeAsync<Models.GetTokenResponseObject>(stream, cancellationToken: TestContext.Current.CancellationToken);
 
 			Assert.NotNull(response);
 			Assert.Matches("^[0-9a-z]{30}$", response!.access_token);
@@ -64,11 +64,11 @@ namespace Helpers.Twitch.Tests
 
 			//requestMessage.Headers.Accept.Add( = "application/vnd.twitchtv.v5+json";
 
-			using var responseMessage = await _httpClient.SendAsync(requestMessage);
+			using var responseMessage = await _httpClient.SendAsync(requestMessage, TestContext.Current.CancellationToken);
 
-			using var stream = await responseMessage.Content!.ReadAsStreamAsync();
+			using var stream = await responseMessage.Content!.ReadAsStreamAsync(TestContext.Current.CancellationToken);
 
-			var response = await JsonSerializer.DeserializeAsync<Models.GetUsersResponseObject>(stream);
+			var response = await JsonSerializer.DeserializeAsync<Models.GetUsersResponseObject>(stream, cancellationToken: TestContext.Current.CancellationToken);
 
 			var count = 0;
 

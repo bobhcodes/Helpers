@@ -19,7 +19,7 @@ public class HttpExtensionsTests : IClassFixture<Fixtures.HttpClientFixture>
 		var uri = new Uri(uriString);
 
 		// Act
-		var response = await _httpClient.GetAsync<HttpBinResponseObject>(uri);
+		var response = await _httpClient.GetAsync<HttpBinResponseObject>(uri, TestContext.Current.CancellationToken);
 
 		// Assert
 		Assert.NotNull(response);

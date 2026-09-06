@@ -133,7 +133,7 @@ public class IOExtensionsTests
 		await using var stream = new MemoryStream(bytes);
 
 		// Act
-		var actual = await IOExtensions.ReadLinesAsync(stream).Take(expected.Length).ToListAsync();
+		var actual = await IOExtensions.ReadLinesAsync(stream).Take(expected.Length).ToListAsync(TestContext.Current.CancellationToken);
 
 		// Assert
 		Assert.Equal(expected.Length, actual.Count);
@@ -167,7 +167,7 @@ public class IOExtensionsTests
 		var reader = new StreamReader(stream);
 
 		// Act
-		var actual = await IOExtensions.ReadLinesAsync(stream).Take(expected.Length).ToListAsync();
+		var actual = await IOExtensions.ReadLinesAsync(stream).Take(expected.Length).ToListAsync(TestContext.Current.CancellationToken);
 
 		// Assert
 		Assert.False(stream.Disposed);

@@ -35,8 +35,8 @@ public class DependencyInjectionTests
 
 	private class Config : Concrete.Client.IConfig
 	{
-		public string Token { get; set; }
-		public Uri BaseAddress { get; set; }
+		public string Token { get; set; } = "default-token";
+		public Uri BaseAddress { get; set; } = new("http://localhost");
 	}
 
 	[Fact]

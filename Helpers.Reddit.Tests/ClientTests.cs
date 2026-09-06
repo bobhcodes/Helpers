@@ -10,7 +10,7 @@ public partial class ClientTests(Fixture fixture) : IClassFixture<Fixture>
 	[Fact]
 	public async Task GetRandomSubredditTests()
 	{
-		var subreddit = await _sut.GetRandomSubredditAsync();
+		var subreddit = await _sut.GetRandomSubredditAsync(TestContext.Current.CancellationToken);
 
 		Assert.NotEmpty(subreddit);
 	}
@@ -19,7 +19,7 @@ public partial class ClientTests(Fixture fixture) : IClassFixture<Fixture>
 	public async Task GetThreadsTests(string subredditName, int count)
 	{
 		// Act
-		var entries = await _sut.GetThreadsAsync(subredditName).Take(count).ToArrayAsync();
+		var entries = await _sut.GetThreadsAsync(subredditName, TestContext.Current.CancellationToken).Take(count).ToArrayAsync(TestContext.Current.CancellationToken);
 
 		// Assert
 		Assert.NotEmpty(entries);

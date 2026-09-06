@@ -20,28 +20,28 @@ public sealed class ServiceTests : IClassFixture<Fixtures.ServiceFixture>
 		var prefix = Networking.Models.AddressPrefix.Parse(s, provider: null);
 
 		// see if already exists
-		var exists = await _sut.GetBlackholesAsync().AnyAsync(b => b == prefix);
+		var exists = await _sut.GetBlackholesAsync(TestContext.Current.CancellationToken).AnyAsync(b => b == prefix, TestContext.Current.CancellationToken);
 
 		// if so, remove it
-		if (exists) await _sut.DeleteBlackholeAsync(prefix);
+		if (exists) await _sut.DeleteBlackholeAsync(prefix, TestContext.Current.CancellationToken);
 
 		// Assert it was removed
-		Assert.False(await _sut.GetBlackholesAsync().AnyAsync(b => b == prefix));
+		Assert.False(await _sut.GetBlackholesAsync(TestContext.Current.CancellationToken).AnyAsync(b => b == prefix, TestContext.Current.CancellationToken));
 
 		// add it
-		await _sut.AddBlackholeAsync(prefix);
+		await _sut.AddBlackholeAsync(prefix, TestContext.Current.CancellationToken);
 
 		// Assert it was added
-		Assert.True(await _sut.GetBlackholesAsync().AnyAsync(b => b == prefix));
+		Assert.True(await _sut.GetBlackholesAsync(TestContext.Current.CancellationToken).AnyAsync(b => b == prefix, TestContext.Current.CancellationToken));
 
 		// delete it
-		await _sut.DeleteBlackholeAsync(prefix);
+		await _sut.DeleteBlackholeAsync(prefix, TestContext.Current.CancellationToken);
 
 		// Assert it was deleted
-		Assert.False(await _sut.GetBlackholesAsync().AnyAsync(b => b == prefix));
+		Assert.False(await _sut.GetBlackholesAsync(TestContext.Current.CancellationToken).AnyAsync(b => b == prefix, TestContext.Current.CancellationToken));
 
 		// if it existed previously, put it back
-		if (exists) await _sut.AddBlackholeAsync(prefix);
+		if (exists) await _sut.AddBlackholeAsync(prefix, TestContext.Current.CancellationToken);
 	}
 
 	[Theory]
@@ -49,7 +49,7 @@ public sealed class ServiceTests : IClassFixture<Fixtures.ServiceFixture>
 	public async Task AddManyBlackholes(string filename)
 	{
 		var path = Path.Combine(".", "Data", filename);
-		var lines = await File.ReadAllLinesAsync(path);
+		var lines = await File.ReadAllLinesAsync(path, TestContext.Current.CancellationToken);
 
 		Assert.NotNull(lines);
 		Assert.NotEmpty(lines);
@@ -64,6 +64,6 @@ public sealed class ServiceTests : IClassFixture<Fixtures.ServiceFixture>
 		Assert.NotEmpty(prefixes);
 		Assert.DoesNotContain(default, prefixes);
 
-		await _sut.AddBlackholesAsync(prefixes);
+		await _sut.AddBlackholesAsync(prefixes, TestContext.Current.CancellationToken);
 	}
 }

@@ -50,7 +50,7 @@ public class RepositoryBaseTests : IClassFixture<Helpers.XUnitClassFixtures.User
 			await sut.ExecuteAsync($"INSERT `{database}`.`{tableName}` (id, name) VALUES (@id, @name);", @params);
 
 			var results = await sut.QueryAsync<(short, string)>($"SELECT * FROM `{database}`.`{tableName}`;")
-				.ToListAsync();
+				.ToListAsync(TestContext.Current.CancellationToken);
 
 			// Assert
 			Assert.NotEmpty(results);
@@ -91,7 +91,7 @@ public class RepositoryBaseTests : IClassFixture<Helpers.XUnitClassFixtures.User
 		var sut = new TestRepository(connection);
 
 		var results = await sut.QueryAsync<DateTime>("select now() union all select now();")
-			.ToListAsync();
+			.ToListAsync(TestContext.Current.CancellationToken);
 
 		var now = DateTime.UtcNow;
 

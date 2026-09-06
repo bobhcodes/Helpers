@@ -33,8 +33,8 @@ public class ServiceTests(Fixture fixture) : IClassFixture<Fixture>
 			states.Add(state);
 		}
 
-		Assert.NotEmpty(states.Where(b => b));
-		Assert.NotEmpty(states.Where(b => !b));
+		Assert.Contains(states, b => b);
+		Assert.DoesNotContain(states, b => !b);
 	}
 
 	[Theory]

@@ -11,7 +11,7 @@ public class ClientTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fixt
 	[InlineData("cat /tmp/dhcp.leases")]
 	public async Task RunCommandTests(string commandText)
 	{
-		var output = await _sut.RunCommandAsync(commandText);
+		var output = await _sut.RunCommandAsync(commandText, TestContext.Current.CancellationToken);
 
 		Assert.NotEmpty(output);
 	}

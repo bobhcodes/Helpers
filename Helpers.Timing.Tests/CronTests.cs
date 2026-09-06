@@ -15,6 +15,7 @@ public class CronTests
 		var ok = CronExpression.TryParse(s, CronFormat.Standard, out var expession);
 
 		Assert.True(ok);
+		Assert.NotNull(expession);
 
 		var actual = expession.GetNextOccurrence(_now, TimeZoneInfo.Utc);
 

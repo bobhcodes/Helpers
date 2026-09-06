@@ -11,7 +11,7 @@ public class ClientTests(Fixture fixture) : IClassFixture<Fixture>
 	public async Task GetInfoTests()
 	{
 		// Act
-		var info = await _sut.GetInfoAsync();
+		var info = await _sut.GetInfoAsync(TestContext.Current.CancellationToken);
 
 		// Assert
 		Assert.NotEqual(default, info);
@@ -23,7 +23,7 @@ public class ClientTests(Fixture fixture) : IClassFixture<Fixture>
 	public async Task GetTests()
 	{
 		// Act
-		var light = await _sut.GetAsync();
+		var light = await _sut.GetAsync(TestContext.Current.CancellationToken);
 
 		// Assert
 		Assert.NotEqual(default, light);
@@ -35,8 +35,8 @@ public class ClientTests(Fixture fixture) : IClassFixture<Fixture>
 	{
 		// Act
 		var light = new WhiteLight(on, brightness, temperature);
-		var response = await _sut.SetAsync(light);
-		var content = await response.Content.ReadAsStringAsync();
+		var response = await _sut.SetAsync(light, TestContext.Current.CancellationToken);
+		var content = await response.Content.ReadAsStringAsync(TestContext.Current.CancellationToken);
 
 		// Assert
 		Assert.True(response.IsSuccessStatusCode, response.StatusCode + " " + content);

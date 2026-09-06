@@ -11,7 +11,7 @@ public class ClientTests(MockingFixture fixture) : IClassFixture<MockingFixture>
 	public async Task GetBooksTests()
 	{
 		// Act
-		var entries = await _sut.GetEntriesAsync().ToArrayAsync();
+		var entries = await _sut.GetEntriesAsync(TestContext.Current.CancellationToken).ToArrayAsync(TestContext.Current.CancellationToken);
 
 		// Assert
 		Assert.NotNull(entries);
@@ -36,7 +36,7 @@ public class ClientTests(MockingFixture fixture) : IClassFixture<MockingFixture>
 		var uri = new Uri(uriString);
 
 		// Act
-		var file = await _sut.GetFileAsync(uri);
+		var file = await _sut.GetFileAsync(uri, TestContext.Current.CancellationToken);
 
 		// Assert
 		Assert.NotNull(file);

@@ -32,8 +32,8 @@ public class CancellationTokenTests
 	{
 		// Arrange
 		var task = Task.WhenAny(
-			Async(),
-			Task.Delay(timeout));
+			Async(TestContext.Current.CancellationToken),
+			Task.Delay(timeout, TestContext.Current.CancellationToken));
 
 		// Act
 		var stopwatch = Stopwatch.StartNew();
@@ -71,8 +71,8 @@ public class CancellationTokenTests
 		// Arrange
 		using var httpClient = new HttpClient();
 		var task = Task.WhenAny(
-			GetStringAsync(httpClient, new Uri(requestUri)),
-			Task.Delay(timeout));
+			GetStringAsync(httpClient, new Uri(requestUri), TestContext.Current.CancellationToken),
+			Task.Delay(timeout, TestContext.Current.CancellationToken));
 
 		// Act
 		var stopwatch = Stopwatch.StartNew();

@@ -16,7 +16,7 @@ public sealed class OpenWrtClientTests : IClassFixture<Fixtures.ClientFixture>
 	[InlineData("ip route show", @"(\d+\.\d+\.\d+\.\d+)")]
 	public async Task ExecuteCommand(string command, string expected)
 	{
-		var actual = await _sut.ExecuteCommandAsync(command);
+		var actual = await _sut.ExecuteCommandAsync(command, TestContext.Current.CancellationToken);
 		Assert.Matches(expected, actual);
 	}
 }

@@ -9,7 +9,7 @@ public class DeserializationTests
 	public async Task InfoTests(params string[] paths)
 	{
 		await using var stream = new FileStream(path: Path.Combine(paths), FileMode.Open);
-		var response = await JsonSerializer.DeserializeAsync<InfoResponse>(stream);
+		var response = await JsonSerializer.DeserializeAsync<InfoResponse>(stream, cancellationToken: TestContext.Current.CancellationToken);
 		Assert.NotEqual(default, response);
 		Assert.NotEqual(default, response!.effects);
 		Assert.NotNull(response.effects.effectsList);

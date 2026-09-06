@@ -23,20 +23,20 @@ public class SocketClientConnectionTests : IClassFixture<Fixtures.SocketClientFi
 	public async Task HostName()
 	{
 		using var sut = new Helpers.Networking.Clients.Concrete.SocketClient(_config);
-		await sut.ConnectAsync(_hostName, _port);
+		await sut.ConnectAsync(_hostName, _port, TestContext.Current.CancellationToken);
 	}
 
 	[Fact]
 	public async Task EndPoint()
 	{
 		using var sut = new Helpers.Networking.Clients.Concrete.SocketClient(_config);
-		await sut.ConnectAsync(_endPoint);
+		await sut.ConnectAsync(_endPoint, TestContext.Current.CancellationToken);
 	}
 
 	[Fact]
 	public async Task IPAddress()
 	{
 		using var sut = new Helpers.Networking.Clients.Concrete.SocketClient(_config);
-		await sut.ConnectAsync(_ipAddress, _port);
+		await sut.ConnectAsync(_ipAddress, _port, TestContext.Current.CancellationToken);
 	}
 }
