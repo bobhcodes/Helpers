@@ -16,7 +16,7 @@ namespace Helpers.Tracing.Tests
 			"c", "code", "Helpers", "Helpers.Tracing.Tests", "ExtensionMethodsTests.cs")]
 		public void BuildDefaultSpan(
 			string expected,
-			string methodName,
+			string? methodName,
 			params string[] paths)
 		{
 			// Arrange

@@ -25,7 +25,7 @@ public class MockingHandlerTests
 
 		while (count-- > 0)
 		{
-			var bytes = await sut.GetByteArrayAsync(count: 16);
+			var bytes = await sut.GetByteArrayAsync(count: 16, TestContext.Current.CancellationToken);
 			var guid = new Guid(bytes);
 			guids.Add(guid);
 		}

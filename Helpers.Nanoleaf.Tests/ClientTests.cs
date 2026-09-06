@@ -23,7 +23,7 @@ public class ClientTests(Fixture fixture) : IClassFixture<Fixture>
 	[Fact]
 	public async Task GetInfoTests()
 	{
-		var info = await _sut.GetInfoAsync();
+		var info = await _sut.GetInfoAsync(TestContext.Current.CancellationToken);
 		Assert.StartsWith("Shapes ", info.name, StringComparison.OrdinalIgnoreCase);
 	}
 
@@ -31,14 +31,14 @@ public class ClientTests(Fixture fixture) : IClassFixture<Fixture>
 	[InlineData("Cocoa Beach")]
 	public async Task SetEffectTests(string effect)
 	{
-		var response = await _sut.SetEffectAsync(effect);
+		var response = await _sut.SetEffectAsync(effect, TestContext.Current.CancellationToken);
 		Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
 	}
 
 	[Theory, InlineData(true)]
 	public async Task SetOnTests(bool value)
 	{
-		var response = await _sut.SetOnAsync(value);
+		var response = await _sut.SetOnAsync(value, TestContext.Current.CancellationToken);
 		Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
 	}
 }

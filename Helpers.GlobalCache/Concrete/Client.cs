@@ -26,7 +26,7 @@ public class Client : IClient
 
 	public async Task<ReadOnlyMemory<byte>> SendAsync(ReadOnlyMemory<byte> bytes, CancellationToken cancellationToken = default)
 	{
-		ArgumentNullException.ThrowIfNull(bytes);
+		ArgumentOutOfRangeException.ThrowIfZero(bytes.Length);
 		await _socket.SendAsync(bytes, SocketFlags.None, cancellationToken);
 		var buffer = new Memory<byte>(new byte[_bufferSize]);
 		var count = await _socket.ReceiveAsync(buffer, SocketFlags.None, cancellationToken);

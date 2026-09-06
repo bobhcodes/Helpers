@@ -12,7 +12,7 @@ public class ServiceTests(Fixture fixture) : IClassFixture<Fixture>
 	{
 		while (count-- > 0)
 		{
-			var actual = await _sut.GetRandomSubredditNameAsync();
+			var actual = await _sut.GetRandomSubredditNameAsync(TestContext.Current.CancellationToken);
 			Assert.Matches("^[0-9A-Z_a-z]{2,}$", actual);
 		}
 	}
@@ -23,7 +23,7 @@ public class ServiceTests(Fixture fixture) : IClassFixture<Fixture>
 	public async Task GetThreadIdsForSubredditTests(string subredditName, int count)
 	{
 		// Act
-		var threadIds = await _sut.GetThreadIdsForSubredditAsync(subredditName).Take(count).ToArrayAsync();
+		var threadIds = await _sut.GetThreadIdsForSubredditAsync(subredditName, TestContext.Current.CancellationToken).Take(count).ToArrayAsync(TestContext.Current.CancellationToken);
 
 		// Assert
 		Assert.NotEmpty(threadIds);
@@ -36,7 +36,7 @@ public class ServiceTests(Fixture fixture) : IClassFixture<Fixture>
 	public async Task GetCommentsForThreadIdTests(string subreddit, string threadId, int count)
 	{
 		// Act
-		var comments = await _sut.GetCommentsForThreadIdAsync(subreddit, threadId).Take(count).ToArrayAsync();
+		var comments = await _sut.GetCommentsForThreadIdAsync(subreddit, threadId, TestContext.Current.CancellationToken).Take(count).ToArrayAsync(TestContext.Current.CancellationToken);
 
 		// Assert
 		Assert.NotEmpty(comments);

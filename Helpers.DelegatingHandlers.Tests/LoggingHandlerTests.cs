@@ -31,7 +31,7 @@ public class LoggingHandlerTests
 		var client = provider.GetRequiredService<TestClient>();
 
 		// Act
-		var actual = await client.GetStatusCodeAsync(code);
+		var actual = await client.GetStatusCodeAsync(code, TestContext.Current.CancellationToken);
 
 		// Assert
 		Assert.Equal(expected, actual);

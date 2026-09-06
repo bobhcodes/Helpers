@@ -13,7 +13,7 @@ public class UdpClientTests : IClassFixture<Fixtures.UdpClientFixture>
 	[Fact]
 	public async Task Discover()
 	{
-		var strings = await _sut.DiscoverAsync().ToListAsync();
+		var strings = await _sut.DiscoverAsync(TestContext.Current.CancellationToken).ToListAsync(TestContext.Current.CancellationToken);
 
 		Assert.NotEmpty(strings);
 

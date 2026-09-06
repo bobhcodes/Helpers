@@ -14,7 +14,7 @@ namespace Helpers.GitHub.Tests
 		[InlineData("octokit", "octokit.rb")]
 		public async Task GetForks(string owner, string repo)
 		{
-			var forks = await _sut.GetForksAsync(owner, repo).ToListAsync();
+			var forks = await _sut.GetForksAsync(owner, repo).ToListAsync(TestContext.Current.CancellationToken);
 
 			Assert.NotNull(forks);
 			Assert.NotEmpty(forks);
@@ -25,7 +25,7 @@ namespace Helpers.GitHub.Tests
 		[InlineData("octokit", "octokit.rb")]
 		public async Task GetBranches(string owner, string repo)
 		{
-			var branches = await _sut.GetBranchesAsync(owner, repo).ToListAsync();
+			var branches = await _sut.GetBranchesAsync(owner, repo).ToListAsync(TestContext.Current.CancellationToken);
 
 			Assert.NotNull(branches);
 			Assert.NotEmpty(branches);

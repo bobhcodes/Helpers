@@ -54,11 +54,11 @@ public class SerializationTests
 			Assert.NotNull(entry);
 			Assert.NotNull(entry.id);
 			Assert.NotNull(entry.title);
-			Assert.NotNull(entry.updated);
+			Assert.NotEqual(default, entry.updated);
 			Assert.NotNull(entry.name);
 			Assert.NotNull(entry.category);
-			Assert.NotNull(entry.articleCount);
-			Assert.NotNull(entry.mediaCount);
+			Assert.NotEqual(default, entry.articleCount);
+			Assert.NotEqual(default, entry.mediaCount);
 			Assert.NotNull(entry.link);
 		}
 	}

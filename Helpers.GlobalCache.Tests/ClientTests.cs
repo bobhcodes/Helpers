@@ -21,7 +21,7 @@ public class ClientTests : IClassFixture<Fixtures.ClientFixture>
 		"completeir")]
 	public async Task SendTests(string message, string expected)
 	{
-		var response = await _sut.SendAsync(message);
+		var response = await _sut.SendAsync(message, TestContext.Current.CancellationToken);
 		Assert.NotNull(response);
 		Assert.StartsWith(expected, response, StringComparison.OrdinalIgnoreCase);
 	}

@@ -21,10 +21,10 @@ public class DependencyInjectionTests : IClassFixture<Fixtures.ServiceProviderFi
 		while (count-- > 0)
 		{
 			var sut = _serviceProvider.GetRequiredService<IClient>();
-			var response = await sut.SendAsync(message);
+			var response = await sut.SendAsync(message, TestContext.Current.CancellationToken);
 			Assert.NotNull(response);
 			Assert.StartsWith(expected, response, StringComparison.OrdinalIgnoreCase);
-			await Task.Delay(millisecondsDelay: 1_000);
+			await Task.Delay(millisecondsDelay: 1_000, TestContext.Current.CancellationToken);
 		}
 	}
 }

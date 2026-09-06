@@ -63,7 +63,7 @@ public sealed class IntervalExtensionsTests : IDisposable
 		IInterval interval = new Interval(unit, count);
 
 		var stopwatch = Stopwatch.StartNew();
-		await interval.SleepTillNextAsync();
+		await interval.SleepTillNextAsync(TestContext.Current.CancellationToken);
 		stopwatch.Stop();
 
 		Assert.Equal(expected, stopwatch.ElapsedMilliseconds, tolerance: 1_000d);

@@ -24,7 +24,7 @@ namespace Helpers.PeeringDB.Tests
 		[InlineData(6_483, 2_906, 40_027, 55_095)]
 		public async Task GetAsnByOrganisationId(int orgId, params int[] expectedAsns)
 		{
-			var actual = await GetAsnByOrganisationIdAsync(orgId).ToListAsync();
+			var actual = await GetAsnByOrganisationIdAsync(orgId).ToListAsync(TestContext.Current.CancellationToken);
 			Assert.Equal(expectedAsns, actual);
 		}
 
@@ -34,7 +34,7 @@ namespace Helpers.PeeringDB.Tests
 		public async Task SearchOrganisations(string term, params int[] expectedIds)
 		{
 			// Act
-			var organisations = await SearchOrganisationsAsync(term).ToListAsync();
+			var organisations = await SearchOrganisationsAsync(term).ToListAsync(TestContext.Current.CancellationToken);
 
 			// Assert
 			Assert.NotNull(organisations);
@@ -48,7 +48,7 @@ namespace Helpers.PeeringDB.Tests
 		public async Task SearchNetworks(string term, params int[] expectedAsns)
 		{
 			// Act
-			var networks = await SearchNetworksAsync(term).ToListAsync();
+			var networks = await SearchNetworksAsync(term).ToListAsync(TestContext.Current.CancellationToken);
 
 			// Assert
 			Assert.NotNull(networks);
@@ -98,6 +98,7 @@ namespace Helpers.PeeringDB.Tests
 		}
 	}
 
+#pragma warning disable CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
 #pragma warning disable IDE1006 // Naming Styles
 	public record Wrapper<T>(IList<T> data);
 	public record org(int id, string name, IList<int> net_set, DateTime created, DateTime updated, string status)
@@ -105,5 +106,5 @@ namespace Helpers.PeeringDB.Tests
 	public record net(int id, string name, int asn, DateTime created, DateTime updated, string status)
 		: @base(id, name, created, updated, status);
 	public abstract record @base(int id, string name, DateTime created, DateTime updated, string status);
-#pragma warning restore IDE1006 // Naming Styles
+#pragma warning restore CS8981, IDE1006
 }

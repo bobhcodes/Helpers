@@ -18,32 +18,32 @@ public class ServiceTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fix
 		var prefix = Networking.Models.AddressPrefix.Parse(s, null);
 
 		// see if already exists
-		var exists = await _sut.GetBlackholesAsync().AnyAsync(b => b == prefix);
+		var exists = await _sut.GetBlackholesAsync(TestContext.Current.CancellationToken).AnyAsync(b => b == prefix, TestContext.Current.CancellationToken);
 
 		// if so, remove it
-		if (exists) await _sut.DeleteBlackholeAsync(prefix);
+		if (exists) await _sut.DeleteBlackholeAsync(prefix, TestContext.Current.CancellationToken);
 
 		// Assert it was removed
-		Assert.False(await _sut.GetBlackholesAsync().AnyAsync(b => b == prefix));
+		Assert.False(await _sut.GetBlackholesAsync(TestContext.Current.CancellationToken).AnyAsync(b => b == prefix, TestContext.Current.CancellationToken));
 
 		// add it
-		await _sut.AddBlackholeAsync(prefix);
+		await _sut.AddBlackholeAsync(prefix, TestContext.Current.CancellationToken);
 
-		await Task.Delay(millisecondsDelay: 500);
+		await Task.Delay(millisecondsDelay: 500, TestContext.Current.CancellationToken);
 
-		var a = await _sut.GetBlackholesAsync().ToListAsync();
+		var a = await _sut.GetBlackholesAsync(TestContext.Current.CancellationToken).ToListAsync(TestContext.Current.CancellationToken);
 
 		// Assert it was added
-		Assert.True(await _sut.GetBlackholesAsync().AnyAsync(b => b == prefix));
+		Assert.True(await _sut.GetBlackholesAsync(TestContext.Current.CancellationToken).AnyAsync(b => b == prefix, TestContext.Current.CancellationToken));
 
 		// delete it
-		await _sut.DeleteBlackholeAsync(prefix);
+		await _sut.DeleteBlackholeAsync(prefix, TestContext.Current.CancellationToken);
 
 		// Assert it was deleted
-		Assert.False(await _sut.GetBlackholesAsync().AnyAsync(b => b == prefix));
+		Assert.False(await _sut.GetBlackholesAsync(TestContext.Current.CancellationToken).AnyAsync(b => b == prefix, TestContext.Current.CancellationToken));
 
 		// if it existed previously, put it back
-		if (exists) await _sut.AddBlackholeAsync(prefix);
+		if (exists) await _sut.AddBlackholeAsync(prefix, TestContext.Current.CancellationToken);
 	}
 
 	[Theory]
@@ -67,7 +67,7 @@ public class ServiceTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fix
 	[Fact]
 	public async Task GetBlackholes()
 	{
-		var results = await _sut.GetBlackholesAsync().ToListAsync();
+		var results = await _sut.GetBlackholesAsync(TestContext.Current.CancellationToken).ToListAsync(TestContext.Current.CancellationToken);
 
 		Assert.NotNull(results);
 		Assert.NotEmpty(results);
@@ -96,7 +96,7 @@ public class ServiceTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fix
 	public async Task GetDhcpLeases()
 	{
 		DateTime now = DateTime.UtcNow, later = now.AddDays(7);
-		var entries = await _sut.GetDhcpLeasesAsync().ToListAsync();
+		var entries = await _sut.GetDhcpLeasesAsync(TestContext.Current.CancellationToken).ToListAsync(TestContext.Current.CancellationToken);
 
 		Assert.NotNull(entries);
 		Assert.NotEmpty(entries);
@@ -117,7 +117,7 @@ public class ServiceTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fix
 	public async Task GetLeaseByIPAddress(string ipAddressString, string physicalAddressString)
 	{
 		var ipAddress = IPAddress.Parse(ipAddressString);
-		var lease = await _sut.GetLeaseByIPAddressAsync(ipAddress);
+		var lease = await _sut.GetLeaseByIPAddressAsync(ipAddress, TestContext.Current.CancellationToken);
 		Assert.Equal(physicalAddressString, lease.PhysicalAddress.ToString(), StringComparer.InvariantCultureIgnoreCase);
 	}
 
@@ -126,7 +126,7 @@ public class ServiceTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fix
 	public async Task GetLeaseByPhysicalAddress(string physicalAddressString, string ipAddressString)
 	{
 		var physicalAddress = PhysicalAddress.Parse(physicalAddressString);
-		var lease = await _sut.GetLeaseByPhysicalAddressAsync(physicalAddress);
+		var lease = await _sut.GetLeaseByPhysicalAddressAsync(physicalAddress, TestContext.Current.CancellationToken);
 		Assert.Equal(ipAddressString, lease.IPAddress.ToString(), StringComparer.InvariantCultureIgnoreCase);
 	}
 
@@ -136,9 +136,9 @@ public class ServiceTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fix
 	[Fact(Skip = "removes all the blackholes")]
 	public async Task RemoveAllBlackholes()
 	{
-		await foreach (var subnetAddress in _sut.GetBlackholesAsync())
+		await foreach (var subnetAddress in _sut.GetBlackholesAsync(TestContext.Current.CancellationToken))
 		{
-			await _sut.DeleteBlackholeAsync(subnetAddress);
+			await _sut.DeleteBlackholeAsync(subnetAddress, TestContext.Current.CancellationToken);
 		}
 	}
 
@@ -155,7 +155,7 @@ public class ServiceTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fix
 		{
 			var subnetAddress = Helpers.Networking.Models.AddressPrefix.Parse(subnetAddressString, null);
 
-			await _sut.AddBlackholeAsync(subnetAddress);
+			await _sut.AddBlackholeAsync(subnetAddress, TestContext.Current.CancellationToken);
 			actualCount++;
 		}
 
@@ -172,7 +172,7 @@ public class ServiceTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fix
 		Assert.NotEmpty(prefixes);
 		Assert.DoesNotContain(default, prefixes);
 
-		await _sut.AddBlackholesAsync(prefixes);
+		await _sut.AddBlackholesAsync(prefixes, TestContext.Current.CancellationToken);
 	}
 
 	[Theory(Skip = "expects exactly 400 blackholes")]
@@ -181,16 +181,16 @@ public class ServiceTests(Fixtures.Fixture fixture) : IClassFixture<Fixtures.Fix
 	{
 		Assert.Equal(
 			expected,
-			await _sut.GetBlackholesAsync().CountAsync());
+			await _sut.GetBlackholesAsync(TestContext.Current.CancellationToken).CountAsync(TestContext.Current.CancellationToken));
 	}
 
 	[Fact]
-	public Task RebootTests() => _sut.RebootAsync();
+	public Task RebootTests() => _sut.RebootAsync(TestContext.Current.CancellationToken);
 #pragma warning restore IDE0079, xUnit1004 // Remove unnecessary suppression; Test methods should not be skipped
 
 	[Theory]
 	[InlineData(OperationalStatus.Down)]
 	[InlineData(OperationalStatus.Up)]
-	public Task WifiTests(OperationalStatus status) => _sut.SetWifiStatusAsync(status);
+	public Task WifiTests(OperationalStatus status) => _sut.SetWifiStatusAsync(status, TestContext.Current.CancellationToken);
 	#endregion destructive tests
 }

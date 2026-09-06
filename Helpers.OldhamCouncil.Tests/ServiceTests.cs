@@ -15,8 +15,8 @@ public sealed class ServiceTests : IClassFixture<Fixtures.ServiceFixture>
 	[InlineData("422000112981")]
 	public async Task GetBinCollections(string uprn)
 	{
-		var dictionary = await _sut.GetBinCollectionsAsync(uprn)
-			.ToDictionaryAsync(kvp => kvp.Key, kvp => kvp.Value);
+		var dictionary = await _sut.GetBinCollectionsAsync(uprn, TestContext.Current.CancellationToken)
+			.ToDictionaryAsync(kvp => kvp.Key, kvp => kvp.Value, cancellationToken: TestContext.Current.CancellationToken);
 
 		Assert.NotNull(dictionary);
 		Assert.NotEmpty(dictionary);
@@ -28,8 +28,8 @@ public sealed class ServiceTests : IClassFixture<Fixtures.ServiceFixture>
 	[InlineData("OL1 1UT", default)]
 	public async Task PostcodeAndHouseNumber(string postcode, string? houseNumber)
 	{
-		var dictionary = await _sut.GetBinCollectionsAsync(postcode, houseNumber)
-			.ToDictionaryAsync(kvp => kvp.Key, kvp => kvp.Value);
+		var dictionary = await _sut.GetBinCollectionsAsync(postcode, houseNumber, TestContext.Current.CancellationToken)
+			.ToDictionaryAsync(kvp => kvp.Key, kvp => kvp.Value, cancellationToken: TestContext.Current.CancellationToken);
 
 		Assert.NotNull(dictionary);
 		Assert.NotEmpty(dictionary);

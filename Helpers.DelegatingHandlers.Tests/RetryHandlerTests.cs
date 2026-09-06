@@ -22,7 +22,7 @@ public class RetryHandlerTests(RetryHandlerTests.Fixture fixture) : IClassFixtur
 	{
 		// Act
 		var stopwatch = Stopwatch.StartNew();
-		var response = await _client.GetStatusCodeAsync(statusCode);
+		var response = await _client.GetStatusCodeAsync(statusCode, TestContext.Current.CancellationToken);
 		stopwatch.Stop();
 
 		// Assert

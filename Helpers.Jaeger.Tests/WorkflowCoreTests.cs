@@ -44,7 +44,7 @@ namespace Helpers.Jaeger.Tests
 
 			await _workflowHost.StartWorkflow(nameof(TestWorkflow), data);
 
-			await Task.Delay(millisecondsDelay: 100);
+			await Task.Delay(millisecondsDelay: 100, TestContext.Current.CancellationToken);
 
 			Assert.NotEqual(0, data.Count);
 		}

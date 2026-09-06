@@ -15,7 +15,7 @@ namespace Helpers.Tracing.Middleware.Tests
 		[InlineData("")]
 		[InlineData("a")]
 		[InlineData("neptrsfdznhetprdsfnehdtrpsnhek,brtdpsfzvne,hkrtsfpzne,hbrtsfhnepz,lbvtspfzhbne,lrtfhpsnel,btpsfrhelnj,")]
-		public void TraceMiddlewareTests_AttachRequestBodyToTraceMiddlewareTests_InvokeAsync_SavesTheBody(string body)
+		public async Task TraceMiddlewareTests_AttachRequestBodyToTraceMiddlewareTests_InvokeAsync_SavesTheBody(string body)
 		{
 			// Arrange
 			var results = new List<string>();
@@ -38,7 +38,7 @@ namespace Helpers.Tracing.Middleware.Tests
 			var httpContext = Mock.Of<HttpContext>(c => c.Request.Body == stream);
 
 			// Act
-			sut.InvokeAsync(httpContext).GetAwaiter().GetResult();
+			await sut.InvokeAsync(httpContext);
 
 			// Assert
 			spanMock
@@ -52,7 +52,7 @@ namespace Helpers.Tracing.Middleware.Tests
 		[InlineData("")]
 		[InlineData("a")]
 		[InlineData("neptrsfdznhetprdsfnehdtrpsnhek,brtdpsfzvne,hkrtsfpzne,hbrtsfhnepz,lbvtspfzhbne,lrtfhpsnel,btpsfrhelnj,")]
-		public void TraceMiddlewareTests_AttachResponseBodyToTraceMiddlewareTests_InvokeAsync_SavesTheBody(string body)
+		public async Task TraceMiddlewareTests_AttachResponseBodyToTraceMiddlewareTests_InvokeAsync_SavesTheBody(string body)
 		{
 			// Arrange
 			async Task ProcessRequestAsync(HttpContext context)
@@ -77,7 +77,7 @@ namespace Helpers.Tracing.Middleware.Tests
 			var httpContext = Mock.Of<HttpContext>(c => c.Response.Body == new MemoryStream());
 
 			// Act
-			sut.InvokeAsync(httpContext).GetAwaiter().GetResult();
+			await sut.InvokeAsync(httpContext);
 
 			// Assert
 			spanMock

@@ -12,7 +12,7 @@ public class ExtensionMethodsTests
 	[InlineData(
 		"frtpfrtpahesnehnfrtpaskenfharltp,sku.enlhufitr,pasfnlhateurswp,ftanlrshwep,unrtpsfntrpnisfeufpiluhtfprsulihftprsiulhen",
 		"frtpfrtpahesnehnfrtpaskenfharltp,sku.enlhufitr,pasfnlhateurswp,ftanlrshwep,unrtpsfntrpnisfeufpiluhtf")]
-	public void ExtensionMethodsTests_Truncate(string before, string expected)
+	public void ExtensionMethodsTests_Truncate(string? before, string expected)
 	{
 		Assert.Equal(
 			expected,

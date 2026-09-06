@@ -31,7 +31,7 @@ public class SolutionTests
 	[Fact]
 	public async Task GetDeploymentPhasesTests()
 	{
-		var phases = await GetDeploymentPhasesAsync().ToListAsync();
+		var phases = await GetDeploymentPhasesAsync().ToListAsync(TestContext.Current.CancellationToken);
 
 		Assert.NotEmpty(phases);
 		Assert.All(phases, Assert.NotNull);
