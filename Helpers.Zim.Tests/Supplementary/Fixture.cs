@@ -9,6 +9,8 @@ namespace Helpers.Zim.Tests.Supplementary;
 
 public sealed class Fixture : IDisposable
 {
+	private static readonly Uri _baseAddress = new("https://browse.library.kiwix.org/", UriKind.Absolute);
+	private const string _cookie = "confirmed=yes; filters=lang=eng";
 	private readonly ServiceProvider _serviceProvider;
 
 	public Fixture()
@@ -16,7 +18,11 @@ public sealed class Fixture : IDisposable
 		_serviceProvider = new ServiceCollection()
 			.AddTransient<HttpMessageHandler>(_ => new HttpClientHandler { AllowAutoRedirect = false, })
 			.AddSingleton(new XmlSerializerFactory())
-			.AddHttpClient<IZimClient, ZimClient>(c => c.BaseAddress = new Uri("https://browse.library.kiwix.org/"))
+			.AddHttpClient<IZimClient, ZimClient>(c =>
+				{
+					c.BaseAddress = _baseAddress;
+					c.DefaultRequestHeaders.Add("Cookie", _cookie);
+				})
 				.ConfigurePrimaryHttpMessageHandler<HttpMessageHandler>()
 				.Services
 			.AddTransient<IZimService, ZimService>()
